@@ -1,11 +1,29 @@
 import "./App.css";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Users from "./components/Users";
+
+const getUserList = async () => {
+  const userList = await axios.get("https://reqres.in/api/users?page=2");
+
+  return userList;
+};
 
 function App() {
+  const [userList, setUserList] = useState([]);
+  useEffect(() => {
+    getUserList().then((data) => {
+      setUserList(data.data.data);
+    });
+  }, []);
+
   return (
     <div className="App">
       <div className="absolute w-screen h-screen bg-gradient-to-r from-[#1A1A40] to-[#1B005A] overflow-hidden">
-        <div className=""></div>
+        <div className="">
+          <Users userlist={userList} />
+        </div>
 
         <div className="h-screen w-screen">
           <motion.div
