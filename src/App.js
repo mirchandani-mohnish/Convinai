@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { appendToList, updateList } from "./redux/reducers/list";
 import Users from "./components/Users";
+import CurrentUser from "./components/CurrentUser";
 
 const getUserList = async () => {
   const userList = await axios.get("https://reqres.in/api/users?page=2");
@@ -27,7 +28,10 @@ function App() {
   return (
     <div className="App">
       <div className="absolute w-screen h-screen bg-gradient-to-r from-[#1A1A40] to-[#1B005A] overflow-hidden">
-        <div className="m-5 p-5 rounded-lg border-solid bg-blue-400">
+        <div className="m-5 p-5 rounded-lg bg-blue-400 flex-auto">
+          <CurrentUser />
+        </div>
+        <div className="m-5 p-5 rounded-lg border-solid bg-blue-400 flex-initial">
           <Users />
         </div>
         {/* <div className="h-screen w-screen -z-50">
