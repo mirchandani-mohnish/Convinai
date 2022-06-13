@@ -2,30 +2,35 @@ import "./App.css";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { appendToList, updateList } from "./redux/reducers/list";
 import Users from "./components/Users";
 
 const getUserList = async () => {
   const userList = await axios.get("https://reqres.in/api/users?page=2");
-
+  console.log(userList);
   return userList;
 };
 
 function App() {
-  const [userList, setUserList] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     getUserList().then((data) => {
-      setUserList(data.data.data);
+      dispatch(updateList(data.data.data));
     });
   }, []);
 
+  console.log(
+    "useSelector",
+    useSelector((state) => state.userList)
+  );
   return (
     <div className="App">
       <div className="absolute w-screen h-screen bg-gradient-to-r from-[#1A1A40] to-[#1B005A] overflow-hidden">
-        <div className="">
-          <Users userlist={userList} />
+        <div className="m-5 p-5 rounded-lg border-solid bg-blue-400">
+          <Users />
         </div>
-
-        <div className="h-screen w-screen">
+        {/* <div className="h-screen w-screen -z-50">
           <motion.div
             whileInView={{
               position: "absolute",
@@ -122,6 +127,7 @@ function App() {
             className="-left-5 top-48 absolute rounded-full bg-gradient-to-b from-[#7A0BC0] to-[#BA31BB] w-[90px] h-[90px] opacity-70 rotate-[30deg]"
           ></motion.div>
         </div>
+         */}
       </div>
     </div>
   );
