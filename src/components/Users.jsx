@@ -17,7 +17,7 @@ const UserButton = (props) => {
         onClick={() => {
           props.setCurrentUser(props.val);
         }}
-        className="h-5 w-32 md:h-10 md:wd-30 bg-gray-300 hover:bg-gray-400 m-4 p-2 align-middle text-center justify-center rounded-lg z-50"
+        className="h-5 w-32 md:h-10 md:wd-30 text-white bg-gray-300 bg-opacity-40 hover:bg-gray-400 m-4 p-2 align-middle text-center justify-center rounded-lg z-50"
       >
         {props.val}
       </button>

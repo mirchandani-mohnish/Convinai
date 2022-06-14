@@ -5,10 +5,10 @@ export const userSlice = createSlice({
   initialState: {
     value: {
       payload: {
-        id: 7,
-        email: "michael.lawson@reqres.in",
-        first_name: "Michael",
-        last_name: "Lawson",
+        id: 0,
+        email: "N/A",
+        first_name: "N/A",
+        last_name: "N/A",
         avatar: "https://reqres.in/img/faces/7-image.jpg",
       },
     },
