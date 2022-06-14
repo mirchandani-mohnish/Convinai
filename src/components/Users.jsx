@@ -1,7 +1,14 @@
+import axios from "axios";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { updateUser } from "../redux/reducers/currentUser";
+
+const getUserDetails = async (id) => {
+  const currentUser = await axios.get("https://reqres.in/api/users/" + id);
+  console.log(currentUser.data.data);
+  return currentUser.data.data;
+};
 
 const UserButton = (props) => {
   return (
@@ -29,8 +36,10 @@ const Users = () => {
           val={key}
           key={key}
           setCurrentUser={(id) => {
-            dispatch(updateUser({ id: parseInt(id) }));
-            console.log(id);
+            getUserDetails(id).then((user) => {
+              dispatch(updateUser(user));
+              console.log(user);
+            });
           }}
         />
       ))}
